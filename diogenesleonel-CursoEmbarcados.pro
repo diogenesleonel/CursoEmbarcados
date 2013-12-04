@@ -17,8 +17,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        principal.cpp
+        principal.cpp \
+    serial.cpp
 
-HEADERS  += principal.h
+HEADERS  += principal.h \
+    serial.h
 
 FORMS    += principal.ui
