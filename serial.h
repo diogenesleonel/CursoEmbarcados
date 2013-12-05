@@ -15,6 +15,7 @@ public:
     explicit Serial(QObject *parent = 0);
     void send(int count, char *bytes);
     bool connectNow(QString tty);
+    bool closeConnection();
 
 private:
     QextSerialPort *serial;

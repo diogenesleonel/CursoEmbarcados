@@ -26,7 +26,7 @@ private slots:
 private:
     Ui::Principal *ui;
     PlotGraph *grafico;
-    Serial *serial;
+    Serial *serialConnect;
 
 };
 

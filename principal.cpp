@@ -14,9 +14,9 @@ Principal::Principal(QWidget *parent) :
     //this->setWindowFlags(Qt::SplashScreen);
     this->setWindowFlags(Qt::CustomizeWindowHint);
 
-    serial = new Serial();
+    serialConnect = new Serial(this);
 
-    connect(serial,SIGNAL(newRead(double)),ui->widget,SLOT(updateValues(double)));
+    connect(serialConnect,SIGNAL(newRead(double)),ui->widget,SLOT(updateValues(double)));
 
 
 
@@ -79,13 +79,22 @@ void Principal::on_serial_toggled(bool checked)
 //    }
 
     if(checked){
-        ui->serial->setIcon(QIcon(":/icons/serial-on"));
         // Conecta na Serial
-        // Se der erro mostrar icone serial-error
+
+        if(serialConnect->connectNow()){
+            ui->serial->setIcon(QIcon(":/icons/serial-on"));
+        }else{
+            ui->serial->setIcon(QIcon(":/icons/serial-error"));
+        }
+
     }
     else{
-        ui->serial->setIcon(QIcon(":/icons/serial-off"));
-        // Desconecta Serial
+        if(serialConnect->closeConnection()){
+            ui->serial->setIcon(QIcon(":/icons/serial-off"));
+        }else{
+            ui->serial->setIcon(QIcon(":/icons/serial-error"));
+        }
+
     }
 
 

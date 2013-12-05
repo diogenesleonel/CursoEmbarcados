@@ -47,6 +47,11 @@ bool Serial::connectNow(QString tty="/dev/ttyUSB0")
 
 }
 
+bool Serial::closeConnection()
+{
+    return serial->close();
+}
+
 void Serial::receive()
 {
     QByteArray bytes;
