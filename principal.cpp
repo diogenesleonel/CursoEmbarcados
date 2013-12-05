@@ -14,6 +14,9 @@ Principal::Principal(QWidget *parent) :
     //this->setWindowFlags(Qt::SplashScreen);
     this->setWindowFlags(Qt::CustomizeWindowHint);
 
+    serial = new Serial();
+
+    connect(serial,SIGNAL(newRead(double)),ui->widget,SLOT(updateValues(double)));
 
 
 

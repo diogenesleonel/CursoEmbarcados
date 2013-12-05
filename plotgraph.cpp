@@ -105,3 +105,32 @@ PlotGraph::PlotGraph(QWidget *parent ) :
         timeData[HISTORY - 1 - i] = i;
 
 }
+
+void PlotGraph::updateValues(double num)
+{
+
+
+    for ( int i = dataCount; i > 0; i-- )
+    {
+            if ( i < HISTORY )
+                data[i] = data[i-1];
+    }
+
+        data[0] = num;
+
+
+    if ( dataCount < HISTORY )
+        dataCount++;
+
+    for ( int j = 0; j < HISTORY; j++ )
+        timeData[j]++;
+
+    setAxisScale( QwtPlot::xBottom,
+        timeData[HISTORY - 1], timeData[0] );
+
+       curve->setRawSamples(
+            timeData, data, dataCount );
+
+    replot();
+
+}

@@ -39,6 +39,7 @@ private:
 signals:
     
 public slots:
+    void updateValues(double num);
     
 };
 
