@@ -17,7 +17,6 @@ public:
     QPolygonF points;
     QwtPlot *plot;
     QTimer *time;
-    a
     QwtPlotCurve *curve ;
 
     float t,tt;
