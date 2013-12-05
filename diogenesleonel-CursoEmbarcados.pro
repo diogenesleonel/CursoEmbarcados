@@ -36,3 +36,6 @@ HEADERS  += principal.h \
     plot.h
 
 FORMS    += principal.ui
+
+RESOURCES += \
+    imagens.qrc

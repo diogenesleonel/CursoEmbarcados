@@ -14,6 +14,7 @@ Principal::Principal(QWidget *parent) :
     this->setWindowFlags(Qt::SplashScreen);
 
 
+
 }
 
 Principal::~Principal()

@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="cooler-off">resource/cooler-64.png</file>
+        <file>resource/connect-64.png</file>
+        <file>resource/heater-64.png</file>
+        <file>resource/led-green-on-64.png</file>
+        <file>resource/led-icon.png</file>
+        <file>resource/led-off-64-.png</file>
+        <file>resource/led-red-on-64.png</file>
+        <file>resource/serial-64.png</file>
+        <file>resource/serial-connect.png</file>
+    </qresource>
+</RCC>
