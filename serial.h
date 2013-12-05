@@ -19,9 +19,7 @@ public:
 
 private:
     QextSerialPort *serial;
-    QTimer *time;
     QByteArray bytesReceived;
-    int num;
 
 signals:
          void temperature(double celsius);

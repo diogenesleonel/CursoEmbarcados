@@ -20,19 +20,20 @@
 
 
 #define HISTORY 60
-//class CpuCurve;
 
 class PlotGraph : public QwtPlot
 {
     Q_OBJECT
 public:
     explicit PlotGraph(QWidget * = 0 );
+    void initGraph();
 
 private:
 
     QwtPlotCurve *curve;
-//    CpuCurve *curves;
-
+     QwtPlotCanvas *canvas;
+     QwtSymbol *symbol;
+     QwtPlotGrid *grid;
 
     double data[HISTORY];
     double timeData[HISTORY];

@@ -16,7 +16,7 @@ Principal::Principal(QWidget *parent) :
 
     serialConnect = new Serial(this);
 
-    connect(serialConnect,SIGNAL(temperature(double)),ui->widget,SLOT(updateValues(double)));
+    //connect(serialConnect,SIGNAL(temperature(double)),ui->widget,SLOT(updateValues(double)));
 
 
 
@@ -70,8 +70,13 @@ void Principal::on_serial_toggled(bool checked)
 
         if(serialConnect->connectNow()){
             ui->serial->setIcon(QIcon(":/icons/serial-on"));
+            connect(serialConnect,SIGNAL(temperature(double)),ui->widget,SLOT(updateValues(double)));
+
         }else{
             ui->serial->setIcon(QIcon(":/icons/serial-error"));
+            disconnect(serialConnect,SIGNAL(temperature(double)),ui->widget,SLOT(updateValues(double)));
+            ui->widget->initGraph();
+
         }
 
     }
@@ -80,6 +85,11 @@ void Principal::on_serial_toggled(bool checked)
 
         serialConnect->closeConnection();
         ui->serial->setIcon(QIcon(":/icons/serial-off"));
+
+        disconnect(serialConnect,SIGNAL(temperature(double)),ui->widget,SLOT(updateValues(double)));
+        ui->widget->detachItems();
+        ui->widget->initGraph();
+
 
 
     }

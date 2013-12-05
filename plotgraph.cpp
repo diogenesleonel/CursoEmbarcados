@@ -17,29 +17,7 @@ private:
 };
 
 
-//class CpuCurve: public QwtPlotCurve
-//{
-//public:
-//    CpuCurve( const QString &title ):
-//        QwtPlotCurve( title )
-//    {
-//        setRenderHint( QwtPlotItem::RenderAntialiased );
-//        setRenderThreadCount(4);
 
-//    }
-
-//    void setColor( const QColor &color )
-//    {
-//        QColor c = color;
-//        c.setAlpha( 200 );
-
-//        setPen(c);
-
-//        c.setAlpha( 80 );
-
-//        setBrush(c);
-//    }
-//};
 
 
 
@@ -47,17 +25,42 @@ PlotGraph::PlotGraph(QWidget *parent ) :
     QwtPlot(parent) ,dataCount( 0 )
 {
 
-    setAutoReplot( false );
 
-    QwtPlotCanvas *canvas = new QwtPlotCanvas();
+    initGraph();
 
-    canvas->setBorderRadius( 5 );
+}
+
+void PlotGraph::initGraph()
+{
+
+    canvas = new QwtPlotCanvas();
+    curve = new QwtPlotCurve("");
+    symbol = new QwtSymbol( QwtSymbol::Diamond,
+                            QBrush( Qt::yellow ), QPen( Qt::red, 1 ), QSize( 2, 2 ) );
+    grid = new QwtPlotGrid();
+    QwtScaleWidget *scaleWidget = axisWidget( QwtPlot::xBottom );
+
+
+    curve->setRenderHint( QwtPlotItem::RenderAntialiased );
+    curve->setRenderThreadCount(4);
     setCanvas( canvas );
 
 
+    // Ajusta Borda Minima para aparecer corretamente os labels de x
+    const int fmh = QFontMetrics( scaleWidget->font() ).height();
+    scaleWidget->setMinBorderDist( 0, fmh / 2 );
+
+    curve->attach( this );
+    curve->setSymbol( symbol );
+    grid->attach( this );
+
+    setAutoReplot( false );
+
+    canvas->setBorderRadius( 5 );
+
     plotLayout()->setAlignCanvasToScales( true );
 
-//    setAxisTitle( QwtPlot::xBottom, " [h:m:s]" );
+    setAxisTitle( QwtPlot::xBottom, " [h:m:s]" );
 
     setAxisScaleDraw( QwtPlot::xBottom,
         new TimeScaleDraw( QTime().currentTime()) );
@@ -72,48 +75,23 @@ PlotGraph::PlotGraph(QWidget *parent ) :
     // Alinha eixo X ao canto esquerdo inferior
     setAxisLabelAlignment( QwtPlot::xBottom, Qt::AlignLeft | Qt::AlignBottom );
 
-    // Ajusta Borda Minima para aparecer corretamente os labels de x
-    QwtScaleWidget *scaleWidget = axisWidget( QwtPlot::xBottom );
-    const int fmh = QFontMetrics( scaleWidget->font() ).height();
-    scaleWidget->setMinBorderDist( 0, fmh / 2 );
-
     // Nome eixo Y
     setAxisTitle( QwtPlot::yLeft, "Celsius [C]" );
 
     // Escala eixo Y
     setAxisScale( QwtPlot::yLeft, 0, 100 );
 
-    curve = new QwtPlotCurve("");
-    curve->setRenderHint( QwtPlotItem::RenderAntialiased );
-    curve->setRenderThreadCount(4);
-
     QColor c (Qt::red);
     c.setAlpha( 200 );
     curve->setPen(c);
     c.setAlpha( 80 );
     curve->setBrush(c);
-    curve->attach( this );
-
-
-//    curves = new CpuCurve( "System" );
-//    curves->setColor( Qt::red );
-//    curves->attach( this );
-//    curve = curves;
-
-
-    QwtSymbol *symbol = new QwtSymbol( QwtSymbol::Diamond,
-    QBrush( Qt::yellow ), QPen( Qt::red, 1 ), QSize( 2, 2 ) );
-    curve->setSymbol( symbol );
-
-    QwtPlotGrid *grid = new QwtPlotGrid();
-    grid->attach( this );
 
     curve->setVisible(true );
     replot();
 
     for ( int i = 0; i < HISTORY; i++ )
         timeData[HISTORY - 1 - i] = i;
-
 }
 
 void PlotGraph::updateValues(double num)

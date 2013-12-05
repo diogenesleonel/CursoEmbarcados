@@ -3,10 +3,6 @@
 Serial::Serial(QObject *parent) :
     QObject(parent)
 {
-    time = new QTimer(this);
-    num = 0.0;
-    connect(time,SIGNAL(timeout()),this,SLOT(teste()));
-            time->start(1000);
 }
 
 
@@ -50,6 +46,7 @@ bool Serial::connectNow(QString tty)
 void Serial::closeConnection()
 {
      serial->close();
+     disconnect(serial, SIGNAL(readyRead()), this, SLOT(receive()));
      qDebug() << "Desconectado:" <<serial->errorString();
 
 }
@@ -94,10 +91,14 @@ void Serial::receive()
 //        qDebug() << QString::fromAscii(bytesReceived);
 //        bytesReceived.clear();
     //    }
+
+//    emit temperature(num);
+
+
 }
 
 void Serial::teste()
 {
-    num++;
-    emit temperature(num);
+//    num++;
+//    emit temperature(num);
 }
