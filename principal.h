@@ -17,8 +17,15 @@ public:
     
 private slots:
 
+    void on_Led_toggled(bool checked);
+
+    void on_Led_2_toggled(bool checked);
+
+    void on_serial_toggled(bool checked);
+
 private:
     Ui::Principal *ui;
+
 };
 
 #endif // PRINCIPAL_H
