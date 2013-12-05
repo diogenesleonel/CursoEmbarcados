@@ -15,6 +15,8 @@ public:
     explicit Principal(QWidget *parent = 0);
     ~Principal();
     
+private slots:
+
 private:
     Ui::Principal *ui;
 };

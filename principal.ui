@@ -2,9 +2,6 @@
 <ui version="4.0">
  <class>Principal</class>
  <widget class="QWidget" name="Principal">
-  <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,7 +13,7 @@
   <property name="windowTitle">
    <string>Principal</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
+  <widget class="Plot" name="widget" native="true">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -80,6 +77,14 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Plot</class>
+   <extends>QWidget</extends>
+   <header>plot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
