@@ -20,6 +20,7 @@
 
 
 #define HISTORY 60
+//class CpuCurve;
 
 class PlotGraph : public QwtPlot
 {
@@ -30,6 +31,8 @@ public:
 private:
 
     QwtPlotCurve *curve;
+//    CpuCurve *curves;
+
 
     double data[HISTORY];
     double timeData[HISTORY];

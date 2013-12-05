@@ -14,8 +14,8 @@ class Serial : public QObject
 public:
     explicit Serial(QObject *parent = 0);
     void send(int count, char *bytes);
-    bool connectNow(QString tty);
-    bool closeConnection();
+    bool connectNow(QString tty="/dev/ttyUSB0");
+    void closeConnection();
 
 private:
     QextSerialPort *serial;
@@ -24,7 +24,7 @@ private:
     int num;
 
 signals:
-         void newRead(double temperature);
+         void temperature(double celsius);
     
 public slots:
     void receive();

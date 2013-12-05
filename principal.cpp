@@ -16,7 +16,7 @@ Principal::Principal(QWidget *parent) :
 
     serialConnect = new Serial(this);
 
-    connect(serialConnect,SIGNAL(newRead(double)),ui->widget,SLOT(updateValues(double)));
+    connect(serialConnect,SIGNAL(temperature(double)),ui->widget,SLOT(updateValues(double)));
 
 
 
@@ -64,19 +64,6 @@ void Principal::on_Led_2_toggled(bool checked)
 
 void Principal::on_serial_toggled(bool checked)
 {
-//    QPalette *palette1 = new QPalette();
-//    qDebug("certo");
-//    if(checked){
-//        palette1->setColor(QPalette::Button,Qt::green);
-//        ui->serial->setPalette(*palette1);
-//        // Envia Comando Para Ligar Led
-//    }
-//    else{
-//        palette1->setColor(QPalette::Button,Qt::red);
-//        ui->serial->setPalette(*palette1);
-//        // Envia Comando Para Ligar Led
-
-//    }
 
     if(checked){
         // Conecta na Serial
@@ -89,11 +76,11 @@ void Principal::on_serial_toggled(bool checked)
 
     }
     else{
-        if(serialConnect->closeConnection()){
-            ui->serial->setIcon(QIcon(":/icons/serial-off"));
-        }else{
-            ui->serial->setIcon(QIcon(":/icons/serial-error"));
-        }
+        // Desconecta da Serial
+
+        serialConnect->closeConnection();
+        ui->serial->setIcon(QIcon(":/icons/serial-off"));
+
 
     }
 

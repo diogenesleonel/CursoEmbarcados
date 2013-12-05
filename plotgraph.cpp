@@ -17,29 +17,29 @@ private:
 };
 
 
-class CpuCurve: public QwtPlotCurve
-{
-public:
-    CpuCurve( const QString &title ):
-        QwtPlotCurve( title )
-    {
-        setRenderHint( QwtPlotItem::RenderAntialiased );
-        setRenderThreadCount(3);
+//class CpuCurve: public QwtPlotCurve
+//{
+//public:
+//    CpuCurve( const QString &title ):
+//        QwtPlotCurve( title )
+//    {
+//        setRenderHint( QwtPlotItem::RenderAntialiased );
+//        setRenderThreadCount(4);
 
-    }
+//    }
 
-    void setColor( const QColor &color )
-    {
-        QColor c = color;
-        c.setAlpha( 200 );
+//    void setColor( const QColor &color )
+//    {
+//        QColor c = color;
+//        c.setAlpha( 200 );
 
-        setPen(c);
+//        setPen(c);
 
-        c.setAlpha( 80 );
+//        c.setAlpha( 80 );
 
-        setBrush(c);
-    }
-};
+//        setBrush(c);
+//    }
+//};
 
 
 
@@ -54,12 +54,13 @@ PlotGraph::PlotGraph(QWidget *parent ) :
     canvas->setBorderRadius( 5 );
     setCanvas( canvas );
 
+
     plotLayout()->setAlignCanvasToScales( true );
 
 //    setAxisTitle( QwtPlot::xBottom, " [h:m:s]" );
 
     setAxisScaleDraw( QwtPlot::xBottom,
-        new TimeScaleDraw( QTime(0,0)) );
+        new TimeScaleDraw( QTime().currentTime()) );
 
     // Quantodade de pontos no eixo X aserem mostrados
     setAxisScale( QwtPlot::xBottom, 0, HISTORY );
@@ -82,14 +83,23 @@ PlotGraph::PlotGraph(QWidget *parent ) :
     // Escala eixo Y
     setAxisScale( QwtPlot::yLeft, 0, 100 );
 
+    curve = new QwtPlotCurve("");
+    curve->setRenderHint( QwtPlotItem::RenderAntialiased );
+    curve->setRenderThreadCount(4);
 
-    CpuCurve *curves;
+    QColor c (Qt::red);
+    c.setAlpha( 200 );
+    curve->setPen(c);
+    c.setAlpha( 80 );
+    curve->setBrush(c);
+    curve->attach( this );
 
 
-    curves = new CpuCurve( "System" );
-    curves->setColor( Qt::red );
-    curves->attach( this );
-    curve = curves;
+//    curves = new CpuCurve( "System" );
+//    curves->setColor( Qt::red );
+//    curves->attach( this );
+//    curve = curves;
+
 
     QwtSymbol *symbol = new QwtSymbol( QwtSymbol::Diamond,
     QBrush( Qt::yellow ), QPen( Qt::red, 1 ), QSize( 2, 2 ) );
@@ -108,7 +118,6 @@ PlotGraph::PlotGraph(QWidget *parent ) :
 
 void PlotGraph::updateValues(double num)
 {
-
 
     for ( int i = dataCount; i > 0; i-- )
     {

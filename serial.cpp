@@ -15,7 +15,7 @@ void Serial::send(int count, char *bytes)
 
 }
 
-bool Serial::connectNow(QString tty="/dev/ttyUSB0")
+bool Serial::connectNow(QString tty)
 {
 
 
@@ -47,9 +47,11 @@ bool Serial::connectNow(QString tty="/dev/ttyUSB0")
 
 }
 
-bool Serial::closeConnection()
+void Serial::closeConnection()
 {
-    return serial->close();
+     serial->close();
+     qDebug() << "Desconectado:" <<serial->errorString();
+
 }
 
 void Serial::receive()
@@ -97,5 +99,5 @@ void Serial::receive()
 void Serial::teste()
 {
     num++;
-    emit newRead(num);
+    emit temperature(num);
 }
