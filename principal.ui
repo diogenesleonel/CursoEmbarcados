@@ -16,19 +16,6 @@
   <property name="windowTitle">
    <string>Principal</string>
   </property>
-  <widget class="Plot" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>481</width>
-     <height>201</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>BlankCursor</cursorShape>
-   </property>
-  </widget>
   <widget class="QPushButton" name="Cooler">
    <property name="geometry">
     <rect>
@@ -193,13 +180,23 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="PlotGraph" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>480</width>
+     <height>200</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Plot</class>
+   <class>PlotGraph</class>
    <extends>QWidget</extends>
-   <header>plot.h</header>
+   <header>plotgraph.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

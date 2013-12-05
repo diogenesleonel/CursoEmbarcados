@@ -16,6 +16,9 @@ Principal::Principal(QWidget *parent) :
 
 
 
+
+
+
 }
 
 Principal::~Principal()
