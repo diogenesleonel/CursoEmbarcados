@@ -29,11 +29,11 @@ TEMPLATE = app
 SOURCES += main.cpp\
         principal.cpp \
     serial.cpp \
-    plot.cpp
+    plotgraph.cpp
 
 HEADERS  += principal.h \
     serial.h \
-    plot.h
+    plotgraph.h
 
 FORMS    += principal.ui
 
