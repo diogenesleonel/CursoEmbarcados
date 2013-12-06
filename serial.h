@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <qextserialport.h>
 #include <QTimer>
+#include <QStringList>
 
 // Mensagem T[0-9][0-9][0-9]_C[0-9][0-9][0-9]_H[0-9][0-9][0-9]_\n
 
@@ -17,7 +18,7 @@ public:
     void send(int count, char *bytes);
     bool connectNow(QString tty="/dev/ttyACM0");
     void closeConnection();
-    void decodeMsg(QString msg);
+    void decodeMsg(QByteArray msg);
 
 private:
     QextSerialPort *serial;
@@ -31,7 +32,6 @@ signals:
     
 public slots:
     void receive();
-    void teste();
 
     
 };
