@@ -42,7 +42,7 @@ void PlotGraph::initGraph()
 
 
     curve->setRenderHint( QwtPlotItem::RenderAntialiased );
-    curve->setRenderThreadCount(4);
+//    curve->setRenderThreadCount(2);
     setCanvas( canvas );
 
 

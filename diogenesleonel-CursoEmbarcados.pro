@@ -19,7 +19,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = diogenesleonel-CursoEmbarcados
 # Configuração necessaria para trabalhar com deploy remoto
-    target.files = <NOME DO EXECUTAVEL>
+    target.files = ArduCom
     target.path = /home/root
     INSTALLS = target
 
