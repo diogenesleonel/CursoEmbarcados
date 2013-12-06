@@ -7,6 +7,7 @@
 #include <qextserialport.h>
 #include <QTimer>
 
+// Mensagem T[0-9][0-9][0-9]_C[0-9][0-9][0-9]_H[0-9][0-9][0-9]_\n
 
 class Serial : public QObject
 {
@@ -14,15 +15,19 @@ class Serial : public QObject
 public:
     explicit Serial(QObject *parent = 0);
     void send(int count, char *bytes);
-    bool connectNow(QString tty="/dev/ttyUSB0");
+    bool connectNow(QString tty="/dev/ttyACM0");
     void closeConnection();
+    void decodeMsg(QString msg);
 
 private:
     QextSerialPort *serial;
     QByteArray bytesReceived;
+    QByteArray mensagem;
 
 signals:
          void temperature(double celsius);
+         void cooler(int cycle);
+         void heater(int cycle);
     
 public slots:
     void receive();
