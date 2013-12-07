@@ -9,5 +9,9 @@
         <file alias="led-on-red">resource/led-red-on-64.png</file>
         <file>resource/serial-64.png</file>
         <file>resource/serial-connect.png</file>
+        <file alias="serial-error">resource/connect-64-error.png</file>
+        <file alias="serial-on">resource/connect-64-on.png</file>
+        <file alias="cooler-error">resource/cooler-64-error.png</file>
+        <file alias="cooler-on">resource/cooler-64-on.png</file>
     </qresource>
 </RCC>
