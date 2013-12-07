@@ -15,10 +15,11 @@ class Serial : public QObject
     Q_OBJECT
 public:
     explicit Serial(QObject *parent = 0);
-    void send(int count, char *bytes);
+    void send(QByteArray bytes);
     bool connectNow(QString tty="/dev/ttyACM0");
     void closeConnection();
     void decodeMsg(QByteArray msg);
+    QextSerialPort* getSerial();
 
 private:
     QextSerialPort *serial;
@@ -27,8 +28,8 @@ private:
 
 signals:
          void temperature(double celsius);
-         void cooler(int cycle);
-         void heater(int cycle);
+         void cooler(double cycle);
+         void heater(double cycle);
     
 public slots:
     void receive();
