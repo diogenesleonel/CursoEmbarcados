@@ -5,6 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui
+QMAKE_CXXFLAGS -= -O3
+QMAKE_CXXFLAGS += -O0
+ QMAKE_CXXFLAGS += --debug
 
 # Inclui a lib do qwt assim como os includes o que permite o auto-completar
 CONFIG += qwt
@@ -19,8 +22,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = diogenesleonel-CursoEmbarcados
 # Configuração necessaria para trabalhar com deploy remoto
-    target.files = ArduCom
-    target.path = /home/root
+    target.files = diogenesleonel-CursoEmbarcados
+    target.path = /home/root/app
     INSTALLS = target
 
 TEMPLATE = app
